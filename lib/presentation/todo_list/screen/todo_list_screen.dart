@@ -3,16 +3,16 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_state_management/models/todo.dart';
-import 'package:riverpod_state_management/presentation/todo/provider/todo_provider.dart';
+import 'package:riverpod_state_management/presentation/todo_list/provider/todo_list_provider.dart';
 
-class TodoScreen extends ConsumerStatefulWidget {
-  const TodoScreen({super.key});
+class TodoListScreen extends ConsumerStatefulWidget {
+  const TodoListScreen({super.key});
 
   @override
-  ConsumerState<TodoScreen> createState() => _TodoScreenState();
+  ConsumerState<TodoListScreen> createState() => _TodoListScreenState();
 }
 
-class _TodoScreenState extends ConsumerState<TodoScreen> {
+class _TodoListScreenState extends ConsumerState<TodoListScreen> {
   final _formKey = GlobalKey<FormState>();
   final _titleController = TextEditingController();
   final _bodyController = TextEditingController();
@@ -34,7 +34,7 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
         padding: const EdgeInsets.all(16),
         child: Consumer(
           builder: (context, widRef, child) {
-            final todos = widRef.watch(todoNotifierProvider);
+            final todos = widRef.watch(todoListNotifierProvider);
             if (todos.isEmpty) {
               return const Center(
                 child: Text('Empty Todo'),
@@ -63,7 +63,7 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
                       GestureDetector(
                         onTap: () {
                           ref
-                              .read(todoNotifierProvider.notifier)
+                              .read(todoListNotifierProvider.notifier)
                               .delete(id: todo.id);
                         },
                         child: const Icon(
@@ -138,14 +138,14 @@ class _TodoScreenState extends ConsumerState<TodoScreen> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   if (isUpdate) {
-                    ref.read(todoNotifierProvider.notifier).update(
+                    ref.read(todoListNotifierProvider.notifier).update(
                           newTodo: oldTodo!.copyWith(
                             title: _titleController.text.trim(),
                             body: _bodyController.text.trim(),
                           ),
                         );
                   } else {
-                    ref.read(todoNotifierProvider.notifier).create(
+                    ref.read(todoListNotifierProvider.notifier).create(
                         title: _titleController.text.trim(),
                         body: _bodyController.text.trim());
                   }

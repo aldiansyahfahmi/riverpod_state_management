@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:riverpod_state_management/presentation/counter/screen/counter_screen.dart';
-import 'package:riverpod_state_management/presentation/todo/screen/todo_screen.dart';
+import 'package:riverpod_state_management/router/app_routes.dart';
 
 class MainScreen extends StatelessWidget {
   const MainScreen({super.key});
@@ -17,26 +16,23 @@ class MainScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CounterScreen(),
-                  ),
-                );
+                Navigator.pushNamed(context, AppRoutes.counter);
               },
               child: const Text('Counter'),
             ),
             const SizedBox(height: 16),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const TodoScreen(),
-                  ),
-                );
+                Navigator.pushNamed(context, AppRoutes.todoList);
               },
-              child: const Text('Todo'),
+              child: const Text('Todo List'),
+            ),
+            const SizedBox(height: 16),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.users);
+              },
+              child: const Text('Users'),
             ),
           ],
         ),

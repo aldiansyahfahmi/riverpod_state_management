@@ -2,10 +2,10 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:riverpod_state_management/models/todo.dart';
 import 'package:uuid/uuid.dart';
 
-part 'todo_provider.g.dart';
+part 'todo_list_provider.g.dart';
 
 @Riverpod(keepAlive: true)
-class TodoNotifier extends _$TodoNotifier {
+class TodoListNotifier extends _$TodoListNotifier {
   @override
   List<Todo> build() => <Todo>[];
 
